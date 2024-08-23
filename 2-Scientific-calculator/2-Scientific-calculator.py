@@ -59,6 +59,28 @@ def click(symbol):
         elif symbol == 'ln':
             result = math.log2(eval(val))
 
+        elif symbol == 'deg':
+            result = math.degrees(eval(val))
+
+        elif symbol == 'rad':
+            result = math.radians(eval(val))
+
+        elif symbol == 'e':
+            result = math.e
+
+        elif symbol == 'log10':
+            result = math.log10(eval(val))
+
+        elif symbol == 'rad':
+            result = math.factorial(eval(val))
+
+        elif symbol == '/':
+            entryField.insert(END, "/")
+            return
+
+        elif symbol == '=':
+            result = eval(val)
+
         else:
             entryField.insert(END, symbol)
             return
