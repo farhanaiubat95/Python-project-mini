@@ -5,17 +5,72 @@ import math
 
 def click(symbol):
     val = entryField.get()  # input string value
+    result = ''
 
-    if symbol == 'C':
-        val = val[0:len(val)-1]
+    try:
+        if symbol == 'C':
+            val = val[0:len(val)-1]
+            entryField.delete(0, END)
+            entryField.insert(0, val)
+
+        elif symbol == 'CE':
+            entryField.delete(0, END)
+
+        elif symbol == 'π':
+            result = math.pi
+
+        elif symbol == '2π':
+            result = 2 * math.pi
+
+        elif symbol == 'sinθ':
+            result = math.sin(math.radians(eval(val)))
+
+        elif symbol == 'tanθ':
+            result = math.tan(math.radians(eval(val)))
+
+        elif symbol == 'cosθ':
+            result = math.cos(math.radians(eval(val)))
+
+        elif symbol == 'sinh':
+            result = math.sinh(eval(val))
+
+        elif symbol == 'tanh':
+            result = math.tanh(eval(val))
+
+        elif symbol == 'cosh':
+            result = math.cosh(eval(val))
+
+        elif symbol == '√':
+            result = math.sqrt(eval(val))
+
+        elif symbol == '∛':
+            result = eval(val)**(1/3)
+
+        elif symbol == 'x\u02b8':
+            entryField.insert(END, '**')
+            return
+
+        elif symbol == 'x\u00B3':
+            result = eval(val)**3
+
+        elif symbol == 'x\u00B2':
+            result = eval(val)**2
+
+        elif symbol == 'ln':
+            result = math.log2(eval(val))
+
+        else:
+            entryField.insert(END, symbol)
+            return
+
         entryField.delete(0, END)
-        entryField.insert(0, val)
+        entryField.insert(0, result)
 
-    elif symbol == 'CE':
-        entryField.delete(0, END)
+    except SyntaxError:
+        pass
 
 
-        # GUI Design
+# GUI Design
 root = Tk()
 root.title('Scientific Calculator')
 root.config(bg='gray1', padx=10, pady=20)
@@ -33,18 +88,18 @@ micBtn = Button(root, image=micImg,
 micBtn.grid(row=0, column=4, columnspan=1)
 
 # Button Text List
-button_text_list1 = ["C", "CE", ".", "=", ","]
+button_text_list1 = ["C", "CE", ".", "+", "="]
 button_text_list2 = ["7", "8", "9",
                      "4", "5", "6",
                      "1", "2", "3",
-                     "0", "√", "%",
+                     "0", "√", "∛",
                      " cosθ", "tanθ", "sinθ",
                      " cosh", "tanh", "sinh",
                      "x\u02b8", "x\u00B3", "x\u00B2"]
-button_text_list3 = ["+", "π",
-                     "-", "2π",
-                     "*", "(",
-                     "/", ")",
+button_text_list3 = ["-", "π",
+                     "*", "2π",
+                     "/", "(",
+                     "%", ")",
                      "ln", "deg",
                      "log10", "rad",
                      "x!", "e"]
