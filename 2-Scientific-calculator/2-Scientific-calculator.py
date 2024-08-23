@@ -1,17 +1,21 @@
 from tkinter import *
-
+import math
 # Function for command
 
 
 def click(symbol):
+    val = entryField.get()  # input string value
+
     if symbol == 'C':
-        val = entryField.get()
         val = val[0:len(val)-1]
         entryField.delete(0, END)
         entryField.insert(0, val)
 
+    elif symbol == 'CE':
+        entryField.delete(0, END)
 
-# GUI Design
+
+        # GUI Design
 root = Tk()
 root.title('Scientific Calculator')
 root.config(bg='gray1', padx=10, pady=20)
