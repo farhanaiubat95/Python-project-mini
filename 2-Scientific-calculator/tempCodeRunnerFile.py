@@ -1,1 +1,2 @@
-button_text_list2
+ except:
+            pass

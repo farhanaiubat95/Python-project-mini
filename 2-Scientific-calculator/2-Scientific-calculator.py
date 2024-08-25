@@ -1,8 +1,13 @@
 from tkinter import *
 import math
-# Function for command
+from pygame import mixer  # mixer module help us to play any sound
+import speech_recognition
+import os
+
+mixer.init()  # for initialize
 
 
+# Function for Button command
 def click(symbol):
     val = entryField.get()  # input string value
     result = ''
@@ -91,8 +96,27 @@ def click(symbol):
     except SyntaxError:
         pass
 
+# function for mic command
 
-# GUI Design
+
+def micAudio():
+    mixer.music.load('2-Scientific-calculator/music1.mp3')
+    mixer.music.play()
+
+    sr = speech_recognition.Recognizer()
+    with speech_recognition.Microphone() as m:  # with helps to avoid exception
+
+        # 2 sentence gap duration ,and 2nd voice will be treated next sentence
+        sr.adjust_for_ambient_noise(m, duration=0.2)
+        voice = sr.listen(m)  # voice listen
+        text = sr.recognize_google_cloud(
+            voice, language='en_gb')  # convert audio into text
+        print(text)
+
+        mixer.music.load('2-Scientific-calculator/music2.mp3')
+        mixer.music.play()
+
+        # GUI Design
 root = Tk()
 root.title('Scientific Calculator')
 root.config(bg='gray1', padx=10, pady=20)
@@ -100,13 +124,13 @@ root.geometry('430x580+100+100')
 
 # Entry field
 entryField = Entry(root, font=('arial', 20, 'bold'),
-                   width=10, bg='gray9', fg='white', bd=10, relief='raised')
+                   width=10, bg='gray9', fg='white', bd=10, relief='raised', justify=RIGHT)
 entryField.grid(row=0, column=0, sticky='n'+'s'+'e'+'w', columnspan=4)
 
 # Mic Image
-micImg = PhotoImage(file='mic1.png')
+micImg = PhotoImage(file='2-Scientific-calculator/mic.png')
 micBtn = Button(root, image=micImg,
-                activebackground="gray19", bd=0, bg='gray1')
+                activebackground="gray19", bd=0, bg='gray1', command=micAudio)
 micBtn.grid(row=0, column=4, columnspan=1)
 
 # Button Text List
